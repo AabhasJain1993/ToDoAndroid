@@ -9,6 +9,7 @@ import com.express.todoandroidapp.model.ToDoItemCategory;
 import com.express.todoandroidapp.views.ToDoListView;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements ToDoListView.Listener{
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements ToDoListView.List
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        ButterKnife.bind(this);
 
     }
 

@@ -10,9 +10,15 @@ public class ToDoItem {
 
     int id;
     String itemTitle;
-    boolean isItemDone;
+    boolean isItemDone = false;
     String itemDescription;
     Bitmap itemImage;
 
+    public String getItemTitle() {
+        return itemTitle;
+    }
 
+    public boolean getIsItemDone() {
+        return isItemDone;
+    }
 }

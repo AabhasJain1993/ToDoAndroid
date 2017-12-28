@@ -19,7 +19,7 @@ import java.util.List;
 public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListHolder>  {
 
 
-    public static final String TAG= "SONG LIST ADAPTER";
+    public static final String TAG= "TODO LIST ADAPTER";
     private List<ToDoItemCategory> mItemsList;
     private IToDoItemClickListener mToDoItemClickListener = null;
 
