@@ -20,13 +20,15 @@ public class MainActivity extends AppCompatActivity implements ToDoListView.List
 
     }
 
+    @Bind(R.id.todoListView)
+    ToDoListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        mListView.setListener(this);
     }
 
     @Override

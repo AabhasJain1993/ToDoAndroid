@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.express.todoandroidapp.R;
@@ -27,7 +28,7 @@ public class CategoryItemsListView extends RelativeLayout implements ICategoryIt
     @Bind(R.id.todoList)
     RecyclerView mTodoList;
 
-    private CategoryItemsListView.Listener mListener = null;
+    private Listener mListener = null;
 
     CategoryItemsListView mCategoryItemsListView = null;
 
@@ -66,6 +67,10 @@ public class CategoryItemsListView extends RelativeLayout implements ICategoryIt
         mCategoryItemListAdapter = new CategoryItemsListAdapter(this, mToDoCategoryItemsList);
         mTodoList.setAdapter(mCategoryItemListAdapter);
 
+    }
+
+    public void setListener(Listener listener) {
+        mListener = listener;
     }
 
     @Override
