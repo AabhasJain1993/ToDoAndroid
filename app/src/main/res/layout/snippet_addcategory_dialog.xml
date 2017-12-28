@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:padding="25dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Category"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:id="@+id/categorytitle"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_below="@id/categorytitle"
+            android:hint="Add Category"
+            android:id="@+id/addcategory" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category Already Exists"
+            android:textColor="@color/stadard"
+            android:layout_below="@id/addcategory"
+            android:id="@+id/alertTitleCategory"
+            android:visibility="gone"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:text="ADD"
+            android:textSize="20sp"
+            android:textColor="@color/stadard"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/addcategory"
+            android:padding="5dp"
+            android:id="@+id/addbtn"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:text="CANCEL"
+            android:textSize="20sp"
+            android:textColor="@color/stadard"
+            android:layout_toLeftOf="@id/addbtn"
+            android:layout_below="@id/addcategory"
+            android:padding="5dp"
+            android:layout_marginRight="30dp"
+            />
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

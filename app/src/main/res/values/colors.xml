@@ -8,4 +8,6 @@
     <color name="black">#000000</color>
     <color name="greyishwhite">#C0C0C0</color>
     <color name="background_other">#15693d</color>
+    <color name="stadard">#C51162</color>>
+    <color name="appbarColor">#FAFAFA</color>
 </resources>

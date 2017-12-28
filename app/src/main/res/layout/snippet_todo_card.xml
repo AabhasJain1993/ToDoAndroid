@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="10dp">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Personal"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:maxLength="25"
+        android:id="@+id/todoListItemValue"
+        />
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="acdafa"
+        android:textSize="18sp"
+        android:maxLength="25"
+        android:id="@+id/todoListItemCount"
+        android:layout_below="@id/todoListItemValue"
+        android:layout_marginTop="40dp"
+        />
+</RelativeLayout>
