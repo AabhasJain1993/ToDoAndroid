@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -96,5 +96,39 @@
             android:layout_marginRight="15dp"
             />
 
+
+        <LinearLayout
+            android:id="@+id/completedContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="2"
+            android:weightSum="2"
+            android:paddingTop="20dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Completed"
+                android:textSize="18sp"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                />
+
+
+            <com.express.todoandroidapp.widget.CommonSwitchButton
+                android:id="@+id/smart_clocker_switch"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                app:kswThumbColor="@color/white"
+                app:kswBackColor="@color/switch_normal"
+                app:kswAnimationDuration="0"/>
+        </LinearLayout>
+
     </LinearLayout>
+
 </RelativeLayout>

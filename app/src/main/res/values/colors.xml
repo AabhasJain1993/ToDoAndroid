@@ -10,4 +10,5 @@
     <color name="background_other">#15693d</color>
     <color name="stadard">#C51162</color>>
     <color name="appbarColor">#FAFAFA</color>
+    <color name="switch_normal">#DBDBDB</color>
 </resources>
