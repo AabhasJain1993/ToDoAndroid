@@ -22,8 +22,9 @@ public class ToDoAndroidApplication extends Application {
     }
 
     private void initialize() {
-        Log.d("Debug Database Address" ,DebugDB.getAddressLog());
         DatabaseManager.initializeInstance(AppDataBase.getInstance(getApplicationContext()));
+       // Log.d("Debug Database Address" ,DebugDB.getAddressLog());
+
 
     }
 }

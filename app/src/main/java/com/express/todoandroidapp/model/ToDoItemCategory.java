@@ -8,20 +8,27 @@ import java.util.List;
 
 public class ToDoItemCategory {
 
-    int id;
+
     String CategoryTitle;
-    List<ToDoItem> toDoItemsList;
+    int toDoItemsCount;
 
     public String getCategoryTitle() {
         return CategoryTitle;
     }
 
-    public List<ToDoItem> getToDoItemsList() {
-        return toDoItemsList;
-    }
 
     public int getToDoItemsListCount() {
-        return toDoItemsList.size();
+        return toDoItemsCount;
     }
+
+    public void setCategoryTitle(String str) {
+        CategoryTitle = str;
+    }
+
+
+    public void setToDoItemsListCount(int count) {
+        toDoItemsCount = count;
+    }
+
 
 }

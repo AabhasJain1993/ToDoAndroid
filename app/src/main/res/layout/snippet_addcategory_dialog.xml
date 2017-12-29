@@ -60,6 +60,7 @@
             android:layout_below="@id/addcategory"
             android:padding="5dp"
             android:layout_marginRight="30dp"
+            android:id="@+id/cancelbtn"
             />
     </RelativeLayout>
 

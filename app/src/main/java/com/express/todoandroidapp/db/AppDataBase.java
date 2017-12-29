@@ -48,10 +48,12 @@ public class AppDataBase extends SQLiteOpenHelper {
 //                + KEY_ID + " INTEGER PRIMARY KEY, " + KEY_PATH + " TEXT, "
 //                + KEY_DISPLAY_NAME + " TEXT, " + KEY_IS_JUNK +" INTEGER, "+ KEY_IS_SHOW_THUMBNAILS+ " INTEGER)";
 
+      //  String CREATE_ITEMS_TABLE="CREATE TABLE "+ TABLE_TO_DO_ITEMS + "("
+        //         + KEY_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "+ KEY_CATEGORY + " TEXT, "
+      //          + KEY_ITEM_NUMBER + " INTEGER)";
         String CREATE_ITEMS_TABLE="CREATE TABLE "+ TABLE_TO_DO_ITEMS + "("
-                + KEY_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "+ KEY_CATEGORY + " TEXT, "
-                + KEY_ITEM_NUMBER + " INTEGER)";
-
+                 + KEY_CATEGORY + " TEXT PRIMARY KEY, "
+                 + KEY_ITEM_NUMBER + " INTEGER)";
 //        String CREATE_UNANALYSED_PHOTO_TABLE="CREATE TABLE "+ TABLE_UNANALYSED_PHOTOS + "("
 //                + KEY_PATH+ " TEXT)";
 //
@@ -68,7 +70,7 @@ public class AppDataBase extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //db.execSQL("DROP TABLE IF EXISTS"+TABLE_KNOWN_FOLDER);
-        db.execSQL("DROP TABLE IF EXISTS" +TABLE_TO_DO_ITEMS);
+        db.execSQL("DROP TABLE IF EXISTS " +TABLE_TO_DO_ITEMS);
         onCreate(db);
     }
 

@@ -1,6 +1,7 @@
 package com.express.todoandroidapp.views;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -9,6 +10,8 @@ import android.widget.RelativeLayout;
 
 import com.express.todoandroidapp.R;
 import com.express.todoandroidapp.adapter.ToDoListAdapter;
+import com.express.todoandroidapp.db.DatabaseManager;
+import com.express.todoandroidapp.db.QueryExecutor;
 import com.express.todoandroidapp.interfaces.IToDoItemClickListener;
 import com.express.todoandroidapp.model.ToDoItemCategory;
 
@@ -31,7 +34,7 @@ public class ToDoListView extends RelativeLayout implements IToDoItemClickListen
 
     ToDoListView mToDoListView;
 
-    private ToDoListAdapter mToDoListAdapter;
+    private ToDoListAdapter mToDoListAdapter = null;
     private List<ToDoItemCategory> mCategoryItemsList;
 
 
@@ -64,6 +67,8 @@ public class ToDoListView extends RelativeLayout implements IToDoItemClickListen
     void getDataFromDatabase() {
 
         //TODO get data from database and store in List
+        refreshList();
+        Log.d("ToDoListview", mCategoryItemsList.toString());
         mToDoListAdapter = new ToDoListAdapter(mToDoListView, mCategoryItemsList);
         mTodoList.setAdapter(mToDoListAdapter);
 
@@ -111,4 +116,16 @@ public class ToDoListView extends RelativeLayout implements IToDoItemClickListen
 //        return songsList;
 //    }
 
+    public void refreshList() {
+        DatabaseManager manager= DatabaseManager.getInstance();
+        SQLiteDatabase db=manager.openDatabase();
+        QueryExecutor qe = new QueryExecutor();
+        mCategoryItemsList = qe.getAllCategoryItems(db);
+        manager.closeDatabase();
+
+        if(mToDoListAdapter != null) {
+            mToDoListAdapter.notifyDataSetChanged();
+        }
+
+    }
 }
