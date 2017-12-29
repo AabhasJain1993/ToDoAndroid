@@ -34,7 +34,7 @@ public class ToDoListHolder extends RecyclerView.ViewHolder  implements View.OnC
 
     public void bind(String itemName, int itemCount) {
         mToDoItemName.setText(itemName);
-        mToDoItemCount.setText(itemCount);
+        mToDoItemCount.setText(itemCount+"");
     }
 
     @Override
