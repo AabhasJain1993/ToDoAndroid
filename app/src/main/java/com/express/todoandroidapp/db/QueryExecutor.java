@@ -14,75 +14,60 @@ import java.util.List;
 public class QueryExecutor {
 
     //private static final String TABLE_KNOWN_FOLDER="knowfolder";
-    private static final String TABLE_TO_DO_ITEMS ="todoitems";
+    private static final String TABLE_TO_DO_ITEMS = "todoitems";
 
-    private static final String KEY_ID="id";
-    private static final String KEY_CATEGORY="category";
-    private static final String KEY_ITEM_NUMBER="number";
+    private static final String KEY_ID = "id";
+    private static final String KEY_CATEGORY = "category";
+    private static final String KEY_ITEM_NUMBER = "number";
 
-    private static final String KEY_TITLE="title";
-    private static final String KEY_DESCRIPTION="description";
-    private static final String KEY_IF_DONE="isdone";
+    private static final String KEY_TITLE = "title";
+    private static final String KEY_DESCRIPTION = "description";
+    private static final String KEY_IF_DONE = "isdone";
     private static final String KEY_IMAGE_PATH = "path";
 
-    private void deleteTable(SQLiteDatabase db, String tableName){
-        try{
+    private void deleteTable(SQLiteDatabase db, String tableName) {
+        try {
             db.execSQL("delete from " + tableName);
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.i("Delete Error", e.getLocalizedMessage());
         }
     }
-
-//    public List<KnownFolder> getKnowFolderList(SQLiteDatabase db){
-//        List<KnownFolder> knownFolderList=new ArrayList<>();
-//        String selectQuery="SELECT * from "+TABLE_KNOWN_FOLDER;
-//        try{
-//            Cursor cursor=db.rawQuery(selectQuery,null);
-//            if(cursor.moveToFirst()){
-//                do{
-//                    KnownFolder knownFolder=new KnownFolder(cursor.getString(1),cursor.getString(2),cursor.getInt(3)==1?true:false,
-//                            cursor.getInt(4)==1?true:false);
-//                    knownFolderList.add(knownFolder);
-//                }while(cursor.moveToNext());
-//            }
-//            cursor.close();
-//        }catch (Exception e) {
-//            Logger.i("DB Error "+e.getLocalizedMessage());
-//        }
-//        return knownFolderList;
-//    }
+    
 
     public boolean insertNewCategory(SQLiteDatabase db, String tableName) {
-        List<String> categories=new ArrayList<>();
-        String selectQuery="SELECT "+ KEY_CATEGORY+" from "+TABLE_TO_DO_ITEMS;
-        try{
-            Cursor cursor=db.rawQuery(selectQuery,null);
-            if(cursor.moveToFirst()){
-                do{
+        List<String> categories = new ArrayList<>();
+        String selectQuery = "SELECT " + KEY_CATEGORY + " from " + TABLE_TO_DO_ITEMS;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
                     categories.add(cursor.getString(0));
-                }while(cursor.moveToNext());
+                } while (cursor.moveToNext());
             }
             cursor.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.i("DB Error ", e.getLocalizedMessage());
         }
-        if(categories.contains(tableName.toLowerCase())) {
+        Log.d("categories", categories.toString());
+        if (categories.contains(tableName.toLowerCase())) {
+            Log.d("Aabhas", "Returning false");
             return false;
         }
 
         db.beginTransaction();
-        try{
+        try {
             ContentValues contentValues = new ContentValues();
             contentValues.put(KEY_CATEGORY, tableName.toLowerCase());
             contentValues.put(KEY_ITEM_NUMBER, 0);
             db.insert(TABLE_TO_DO_ITEMS, null, contentValues);
-            String CREATE_NEW_TABLE="CREATE TABLE "+ tableName.toLowerCase() + "("
+            String CREATE_NEW_TABLE = "CREATE TABLE " + tableName.toLowerCase() + "("
                     + KEY_TITLE + " TEXT PRIMARY KEY, "
-                    + KEY_DESCRIPTION + " TEXT, "+ KEY_IF_DONE + " BOOLEAN, "+ KEY_IMAGE_PATH + "TEXT )";
+                    + KEY_DESCRIPTION + " TEXT, " + KEY_IF_DONE + " BOOLEAN, " + KEY_IMAGE_PATH + "TEXT )";
             db.execSQL(CREATE_NEW_TABLE);
-        }catch (Exception e){
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
             Log.i("DB Error ", e.getLocalizedMessage());
-        }finally {
+        } finally {
             db.endTransaction();
         }
 
@@ -92,23 +77,47 @@ public class QueryExecutor {
 
     public List<ToDoItemCategory> getAllCategoryItems(SQLiteDatabase db) {
         List<ToDoItemCategory> list = new ArrayList<>();
-        String selectQuery="SELECT * from "+TABLE_TO_DO_ITEMS;
-        try{
-            Cursor cursor=db.rawQuery(selectQuery,null);
-            if(cursor.moveToFirst()){
-                do{
+        String selectQuery = "SELECT * from " + TABLE_TO_DO_ITEMS;
+        try {
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
                     ToDoItemCategory category = new ToDoItemCategory();
                     category.setCategoryTitle(cursor.getString(0));
                     category.setToDoItemsListCount(cursor.getInt(1));
                     list.add(category);
-                }while(cursor.moveToNext());
+                } while (cursor.moveToNext());
             }
             cursor.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.i("DB Error ", e.getLocalizedMessage());
         }
         return list;
     }
+
+    public List<ToDoItem> getAllCategoryItemsCategoryWise(SQLiteDatabase db, String categoryName) {
+        List<ToDoItem> list = new ArrayList<>();
+
+        String selectFirstQuery = "SELECT * from " + categoryName;
+        try {
+            Cursor cursor = db.rawQuery(selectFirstQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    ToDoItem category = new ToDoItem();
+                    category.setItemTitle(cursor.getString(0));
+                    category.setItemDescription(cursor.getString(1));
+                    category.setIfDone(cursor.getInt(2) == 1 ? true : false);
+                    category.setImagePath(cursor.getString(3));
+                    list.add(category);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (Exception e) {
+            Log.i("DB Error ", e.getLocalizedMessage());
+        }
+        return list;
+    }
+
 
     public void insertNewItemInCategory(SQLiteDatabase db, String tableName, String title, String description, boolean isCompleted, String imagePath) {
         db.beginTransaction();
@@ -119,6 +128,7 @@ public class QueryExecutor {
             contentValues.put(KEY_IF_DONE, isCompleted);
             contentValues.put(KEY_IMAGE_PATH, imagePath);
             db.insert(tableName.toLowerCase(), null, contentValues);
+            db.setTransactionSuccessful();
         }catch (Exception e){
             Log.i("DB Error ", e.getLocalizedMessage());
         }finally {

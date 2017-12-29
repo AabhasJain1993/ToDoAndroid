@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements ToDoListView.List
     public void onCategoryItemClicked(ToDoItemCategory category) {
         Intent intent = new Intent(this, CategoryItemsActivity.class);
         startActivity(intent);
+        intent.putExtra("categoryName",category.getCategoryTitle().toLowerCase());
     }
 
 

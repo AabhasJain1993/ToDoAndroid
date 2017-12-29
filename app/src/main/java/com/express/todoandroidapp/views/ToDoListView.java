@@ -6,9 +6,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.express.todoandroidapp.R;
+import com.express.todoandroidapp.activities.MainActivity;
 import com.express.todoandroidapp.adapter.ToDoListAdapter;
 import com.express.todoandroidapp.db.DatabaseManager;
 import com.express.todoandroidapp.db.QueryExecutor;
@@ -33,7 +35,7 @@ public class ToDoListView extends RelativeLayout implements IToDoItemClickListen
     private Listener mListener = null;
 
     ToDoListView mToDoListView;
-
+    private Context mContext;
     private ToDoListAdapter mToDoListAdapter = null;
     private List<ToDoItemCategory> mCategoryItemsList;
 
@@ -49,6 +51,7 @@ public class ToDoListView extends RelativeLayout implements IToDoItemClickListen
 
     public ToDoListView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mContext = context;
         initView(context);
     }
 
@@ -122,9 +125,18 @@ public class ToDoListView extends RelativeLayout implements IToDoItemClickListen
         QueryExecutor qe = new QueryExecutor();
         mCategoryItemsList = qe.getAllCategoryItems(db);
         manager.closeDatabase();
-
+        Log.d("refereshing list", mCategoryItemsList.toString());
         if(mToDoListAdapter != null) {
-            mToDoListAdapter.notifyDataSetChanged();
+
+            ((MainActivity)mContext).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.d("refreshing list","notifydatasetchanged");
+                    mToDoListAdapter = new ToDoListAdapter(mToDoListView, mCategoryItemsList);
+                    mTodoList.setAdapter(mToDoListAdapter);
+                    }
+                });
+
         }
 
     }

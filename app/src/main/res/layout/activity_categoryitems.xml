@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.express.todoandroidapp.views.ToDoListView
+    <com.express.todoandroidapp.views.CategoryItemsListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/todoCategoryList" />

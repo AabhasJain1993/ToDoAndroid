@@ -37,6 +37,8 @@ public class CategoryItemsActivity extends AppCompatActivity implements Category
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categoryitems);
         ButterKnife.bind(this);
+        String categoryName = getIntent().getStringExtra("categoryName");
+        mCategoryItemsListView.setCategoryName(categoryName);
         mCategoryItemsListView.setListener(this);
     }
 
