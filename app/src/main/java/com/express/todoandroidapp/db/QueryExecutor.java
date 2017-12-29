@@ -32,7 +32,7 @@ public class QueryExecutor {
             Log.i("Delete Error", e.getLocalizedMessage());
         }
     }
-    
+
 
     public boolean insertNewCategory(SQLiteDatabase db, String tableName) {
         List<String> categories = new ArrayList<>();

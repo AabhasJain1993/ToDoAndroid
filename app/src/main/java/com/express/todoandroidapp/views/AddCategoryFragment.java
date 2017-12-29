@@ -67,6 +67,7 @@ public class AddCategoryFragment extends DialogFragment {
         if(mListener !=null) {
             mListener.onClickDialogCancel();
         }
+        removeFragment();
 
     }
 

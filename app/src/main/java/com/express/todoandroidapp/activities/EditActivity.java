@@ -10,6 +10,7 @@ import com.express.todoandroidapp.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by root on 28/12/17.
@@ -25,6 +26,22 @@ public class EditActivity extends AppCompatActivity {
 
     @Bind(R.id.addphotobtn)
     TextView addPhotoBtn;
+
+    @OnClick(R.id.crossbtn)
+    void close() {
+        finish();
+    }
+
+    @OnClick(R.id.save)
+    void saveIndb() {
+
+
+    }
+
+    @OnClick(R.id.delete)
+    void deletefromDB() {
+
+    }
 
     private boolean mIsAddData = false;
 
